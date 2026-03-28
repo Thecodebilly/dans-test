@@ -15,6 +15,7 @@ from flask import Flask, jsonify, render_template, request
 
 DB_PATH = os.getenv("SP500_DB_PATH", "sp500.db")
 WIKI_SYMBOLS_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+PORT = int(os.getenv("PORT", "5000"))
 
 app = Flask(__name__)
 
@@ -206,6 +207,23 @@ def api_prices_history():
 
 
 scheduler = BackgroundScheduler(timezone="UTC")
+_startup_completed = False
+
+
+def run_startup_tasks() -> None:
+    global _startup_completed
+    if _startup_completed:
+        return
+
+    init_db()
+    try:
+        bootstrap_symbols()
+        store_hourly_snapshot()
+    except Exception:
+        # Allow the server to run even if network/bootstrap fails.
+        pass
+    start_scheduler()
+    _startup_completed = True
 
 
 def start_scheduler() -> None:
@@ -214,13 +232,8 @@ def start_scheduler() -> None:
         scheduler.start()
 
 
+run_startup_tasks()
+
+
 if __name__ == "__main__":
-    init_db()
-    try:
-        bootstrap_symbols()
-        store_hourly_snapshot()
-    except (requests.RequestException, ValueError, KeyError, IndexError):
-        # Allow the server to run even if network/bootstrap fails.
-        pass
-    start_scheduler()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=PORT, debug=False)
