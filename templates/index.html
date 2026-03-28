@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S&P 500 Hourly Price Tracker</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>S&P 500 Hourly Price Tracker</h1>
+      <p>Capture all S&amp;P 500 prices hourly, store them, and explore historical snapshots.</p>
+
+      <section class="controls">
+        <button id="bootstrapBtn">Load / Refresh S&amp;P 500 symbols</button>
+        <button id="snapshotBtn">Capture hourly snapshot now</button>
+        <button id="refreshLatestBtn">Refresh latest prices</button>
+      </section>
+
+      <section>
+        <h2>Latest Snapshot</h2>
+        <div id="latestMeta"></div>
+        <div class="table-wrap">
+          <table id="latestTable">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Company</th>
+                <th>Sector</th>
+                <th>Price (USD)</th>
+                <th>Captured At (UTC)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Historic View</h2>
+        <div class="history-controls">
+          <label for="ticker">Ticker</label>
+          <input id="ticker" placeholder="AAPL" value="AAPL" />
+          <label for="hours">Lookback (hours)</label>
+          <input id="hours" type="number" min="1" value="168" />
+          <button id="loadHistoryBtn">Load history</button>
+        </div>
+        <canvas id="historyChart"></canvas>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
