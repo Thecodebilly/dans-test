@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1, h2 {
+  color: #f8fafc;
+}
+
+button {
+  border: 0;
+  background: #2563eb;
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  margin-right: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.controls, .history-controls {
+  margin-bottom: 1rem;
+}
+
+input {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 0.4rem;
+  margin-right: 0.6rem;
+}
+
+.table-wrap {
+  max-height: 480px;
+  overflow-y: auto;
+  border: 1px solid #334155;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th, td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #334155;
+  text-align: left;
+}
+
+#latestMeta {
+  margin-bottom: 0.5rem;
+  color: #94a3b8;
+}
+
+#historyChart {
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
