@@ -26,6 +26,20 @@ python app.py
 
 Then open <http://localhost:5000>.
 
+## Deploy on Railway
+
+This repo is ready for Railway with a `Procfile` that starts Gunicorn.
+
+1. Create a new Railway project and connect this repo.
+2. Railway will install dependencies from `requirements.txt`.
+3. Start command is read from `Procfile`:
+   `gunicorn app:app --bind 0.0.0.0:${PORT:-5000}`.
+4. (Optional) add `SP500_DB_PATH` if you want a custom SQLite file location.
+
+Notes:
+- By default SQLite data is ephemeral unless you mount persistent storage.
+- On startup the app creates the schema, attempts symbol bootstrap, and schedules hourly snapshots.
+
 ## API
 
 - `POST /api/bootstrap` — load/refresh S&P 500 constituents.
